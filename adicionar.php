@@ -1,33 +1,5 @@
 <?php
 require 'config.php';
-$id = 0;
-if(isset($_GET['id']) && empty($_GET['id']) == false) {
-$id = addslashes($_GET['id']);
-}
-if(isset($_POST['nome']) && empty($_POST['nome']) == false) {
-$nome = addslashes($_POST['nome']);
-$email = addslashes($_POST['email']);
-$sql = "UPDATE usuarios SET nome = '$nome', email = '$email' WHERE id = '$id'";
-$pdo->query($sql);
-header("Location: index.php");
-}
-$sql = "SELECT * FROM usuarios WHERE id = '$id'";
-$sql = $conexao->query($sql);
-if($sql->rowCount() > 0){
-$dado = $sql->fetch();
-}else{
-header("Location: index.php");
-}
-?>
-<form method="POST">
-Nome:<br/>
-<input type="text" name="nome" value="<?php echo $dado['nome']; ?>" /><br/>
-E-mail:<br/>
-<input type="text" name="email" value="<?php echo $dado['email']; ?>" /><br/>
-<input type="submit" value="Atualizar" />
-</form>
-
-/*require 'config.php';
 
     if (isset($_POST['nome']) && empty($_POST['nome']) == false) {
         
@@ -63,4 +35,4 @@ E-mail:<br/>
 
     
 </form>
-<strong><a href="index.php">Página Inicial</a></strong>*/
+<strong><a href="index.php">Página Inicial</a></strong>

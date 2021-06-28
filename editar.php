@@ -1,48 +1,24 @@
 <?php
 require 'config.php';
-$id = 0;
-if (isset($_GET['id']) && empty($_GET['id']) == false) {
-    
-    $id = $_GET['id'];
-    
-    $nome = $_GET['nome'];
-    $email = $_GET['email'];
+$id = $_GET['id'];
 
-    $select = "SELECT * FROM usuarios WHERE id = $id";
-    $update = "UPDATE usuarios SET nome = '$nome', email = '$email' WHERE id='$id';";
+$nome = $_POST['nome'];
+$email = $_POST['email'];
 
-    $enviada = $conexao->query($update);
-    $resultado = $enviada->fetch();
+$update = "UPDATE usuarios SET nome = '$nome', email = '$email' WHERE id = '$id'";
 
-    //$update = "UPDATE usuarios SET nome = :nome, email = :email WHERE id='$id';";
-    
-    //var_dump($resultado);
+$conexao->query($update);
 
 
-    
-    //$preparada = $conexao->prepare($update);
-    //$preparada->bindValue(':nome', $nome);
-    //$preparada->bindValue(':email', $email);
 
-    //$preparada->execute();
-    
-    
-    
-} 
-else{
-header("Location: index.php");
-}
 ?>
-
-<form method="GET">
+<form method="POST">
     Nome: </br>
-    <input type="text" name="nome" value="<?php echo $resultado['nome']?>"></br></br>
+    <input type="text" name="nome" value="<?php echo $preparacao['nome'];?>"></br></br>
     Email: </br>
-    <input type="text" name="email" value="<?php echo $resultado['email']?>"></br></br>
+    <input type="text" name="email" value="<?php echo $preparacao['email'];?>"></br></br>
     <input type="submit" value="Atualizar">
 </form>
-<strong><a href="index.php">Página Inicial</a></strong>
+<a href="index.php">Voltar</a><?php
 
-<?php
 
-//header("Location: index.php");
